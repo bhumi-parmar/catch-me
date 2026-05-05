@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Catch Me 😌</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial;
+    background: #0f0f0f;
+    color: white;
+  }
+
+  h1 {
+    text-align: center;
+    color: #ff7a00;
+    margin-top: 20px;
+  }
+
+  .container {
+    display: flex;
+    height: 90vh;
+  }
+
+  
+  .left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 2px solid #222;
+  }
+
+  #face {
+    width: 350px;
+    border-radius: 20px;
+    display: none;
+    box-shadow: 0 0 25px rgba(255,122,0,0.4);
+  }
+
+  #caption {
+    margin-top: 15px;
+    font-size: 20px;
+    text-align: center;
+    color: #ffb366;
+    max-width: 70%;
+  }
+
+
+  .right {
+    width: 50%;
+    position: relative;
+    text-align: center;
+  }
+
+  #heart {
+    position: absolute;
+    font-size: 50px;
+    cursor: pointer;
+    transition: top 0.8s ease, left 0.8s ease;
+  }
+
+  #score {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #ffb366;
+  }
+
+  #final {
+    display: none;
+    margin-top: 30px;
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #ff7a00;
+    color: #ffb366;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+</style>
+</head>
+
+<body>
+
+<h1>Catch Me 😌</h1>
+
+<div class="container">
+
+  
+  <div class="left">
+    <img id="face">
+    <div id="caption"></div>
+  </div>
+
+  
+  <div class="right">
+
+    <p style="color:#aaa;">try catching it 😏</p>
+
+    <div id="heart">🧡</div>
+
+    <div id="score">Caught: 0</div>
+
+    <div id="final">
+      <p>okay… you got me 😌</p>
+      <p>you always manage to make me smile😁</p>
+      <p>so just mushkurado mere liye 🥺🥺and talk to me normally🧡💋</p>
+    </div>
+
+  </div>
+
+</div>
+
+<audio id="pop" src="https://www.myinstants.com/media/sounds/cartoon-pop.mp3"></audio>
+
+<script>
+let heart = document.getElementById("heart");
+let face = document.getElementById("face");
+let caption = document.getElementById("caption");
+let scoreText = document.getElementById("score");
+let pop = document.getElementById("pop");
+
+let score = 0;
+
+let faces = [
+  "face1.png",
+  "face2.png",
+  "face3.png",
+  "face4.png",
+  "face5.png"
+];
+
+let captions = [
+  "ehehehhe hmesha haste rho😁😁😁",
+  "I know you are smiling(suits you)😏",
+  "okay this one is kinda cute 😌",
+  "stop I look funny here😂 muahhhhhh💋💋💋",
+  "you better be smiling rn 😤"
+];
+
+function moveHeart() {
+  let container = document.querySelector(".right");
+
+  let x = Math.random() * (container.clientWidth - 80);
+  let y = Math.random() * (container.clientHeight - 100);
+
+  heart.style.left = x + "px";
+  heart.style.top = y + "px";
+}
+
+setInterval(moveHeart, 1500);
+
+heart.addEventListener("click", function() {
+  pop.play();
+  score++;
+
+  scoreText.innerText = "Caught: " + score;
+
+  let i = Math.floor(Math.random() * faces.length);
+
+  face.src = faces[i];
+  face.style.display = "block";
+
+  caption.innerText = captions[i];
+
+  if (score >= 5) {
+    heart.style.display = "none";
+    document.getElementById("final").style.display = "block";
+  }
+});
+
+moveHeart();
+</script>
+
+</body>
+</html>
